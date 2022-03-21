@@ -1,10 +1,9 @@
 # PyTermCore
 A bunch of useful modules for working with python
 
-# Storinator
-**Location: /src/core/storage/base.py**
+# Storinator ([source](https://github.com/spoopytim/PyTermCore/blob/master/src/core/storage/base.py))
 
-**This module requires extensions**
+**_This module requires extensions_**
 
 ## Usage
 ```py
@@ -118,4 +117,46 @@ class JsonStorinator(Storinator):
             fs = i["fs"]
             fs.close()
             return True
+```
+
+# Loginator ([source](https://github.com/spoopytim/PyTermCore/blob/master/src/core/storage/base.py))
+
+## Usage
+```py
+from src.core import Loginator
+
+logger = Loginator()
+logger.log("Done something")
+logger.info("Something happened")
+logger.error("Oops something broke")
+```
+
+# Taskinator
+```py
+# Import module
+from src.core import Taskinator, Task
+
+# Initialize
+tasks = Taskinator()
+# Create a task that prints "Printed from tasks" with end="\n"
+task1 = Task(print, "Printed from tasks", end="\n")
+# Create another task that prints "Also printed from tasks"
+task2 = Task(print, "Also printed from tasks")
+
+# Add both tasks to the queue
+tasks.enqueue(task1)
+tasks.enqueue(task2)
+
+# Get all tasks and formats them with their arguments
+for i, task in enumerate(tasks.pending):
+	print(f"Task {i} - {str(task.function.__name__)} with args {str(task.args)} and kwargs {str(task.kwargs)}")
+
+# Grab the first task, process it then eject it from the stack
+tasks.process()
+print("One more to go!")
+# Grab the second task, process it but do not eject it from the stack
+tasks.process(remove=False)
+
+# Show that there are no tasks pending by outputting the array where tasks are held
+print(f"No tasks pending -> {tasks.pending}")
 ```

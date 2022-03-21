@@ -132,6 +132,8 @@ logger.error("Oops something broke")
 ```
 
 # Taskinator ([source](https://github.com/spoopytim/PyTermCore/blob/master/src/core/tasks.py))
+
+## Usage
 ```py
 # Import module
 from src.core import Taskinator, Task
